@@ -18,8 +18,10 @@ model User {
     email String @unique()
     name String?
     posts Post[]
+
     zenstack_guard Boolean @default(true)
     zenstack_transaction String?
+
     @@index([zenstack_transaction])
 }
 
@@ -35,7 +37,9 @@ model Post {
     viewCount Int @default(0)
     author User? @relation(fields: [authorId], references: [id])
     authorId Int?
+
     zenstack_guard Boolean @default(true)
     zenstack_transaction String?
+
     @@index([zenstack_transaction])
 }
