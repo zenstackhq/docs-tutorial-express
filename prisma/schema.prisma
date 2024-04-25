@@ -4,32 +4,32 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 datasource db {
-    provider = "sqlite"
-    url = "file:./dev.db"
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 /// @@allow('read', true)
 model User {
-    id Int @id() @default(autoincrement())
-    email String @unique()
-    name String?
-    posts Post[]
+  id    Int     @id() @default(autoincrement())
+  email String  @unique()
+  name  String?
+  posts Post[]
 }
 
 /// @@allow('all', auth() == author)
 /// @@allow('read', auth() != null && published)
 model Post {
-    id Int @id() @default(autoincrement())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    title String
-    content String?
-    published Boolean @default(false)
-    viewCount Int @default(0)
-    author User? @relation(fields: [authorId], references: [id])
-    authorId Int?
+  id        Int      @id() @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  viewCount Int      @default(0)
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  Int?
 }

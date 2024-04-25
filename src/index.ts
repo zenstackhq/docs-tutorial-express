@@ -50,11 +50,7 @@ app.post(`/post`, async (req, res) => {
     console.log('User id:', getUserId(req));
     const { title, content } = req.body;
     const result = await getPrisma(req).post.create({
-        data: {
-            title,
-            content,
-            author: { connect: { id: getUserId(req) } },
-        },
+        data: { title, content },
     });
     res.json(result);
 });
