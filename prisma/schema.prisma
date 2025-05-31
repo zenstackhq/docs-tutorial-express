@@ -12,7 +12,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-/// @@allow('read', true)
 model User {
   id    Int     @id() @default(autoincrement())
   email String  @unique()
@@ -20,8 +19,6 @@ model User {
   posts Post[]
 }
 
-/// @@allow('all', auth() == author)
-/// @@allow('read', auth() != null && published)
 model Post {
   id        Int      @id() @default(autoincrement())
   createdAt DateTime @default(now())
